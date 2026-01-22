@@ -25,24 +25,24 @@
 
 /* ── Energy = Lloyd Garmadon ──────────────────────────────────────── */
 [data-theme="energy"] {
-  --bg:        #f0fdf4;           /* fond vert très clair / émeraude pâle */
-  --surface:   #ffffff;
-  --text:      #065f46;           /* texte vert foncé ninja */
-  --text-sec:  #047857;
-  --accent:    #10b981;           /* vert émeraude vif (Lloyd energy) */
-  --accent-soft: #d1fae5;         /* vert très doux pour les fonds */
-  --border:    #a7f3d0;
+  --bg: #f0fdf4; /* fond vert très clair / émeraude pâle */
+  --surface: #ffffff;
+  --text: #065f46; /* texte vert foncé ninja */
+  --text-sec: #047857;
+  --accent: #10b981; /* vert émeraude vif (Lloyd energy) */
+  --accent-soft: #d1fae5; /* vert très doux pour les fonds */
+  --border: #a7f3d0;
 }
 
 /* ── Dark = Garmadon (père) ───────────────────────────────────────── */
 [data-theme="dark"] {
-  --bg:        #0f001a;           /* violet-noir très sombre */
-  --surface:   #1a0033;           /* fond carte prune sombre */
-  --text:      #e9d5ff;           /* texte violet clair / lavande */
-  --text-sec:  #c084fc;
-  --accent:    #a855f7;           /* violet vif menaçant (Garmadon) */
-  --accent-soft: #6b21a8;         /* violet plus sombre pour contrastes */
-  --border:    #4c1d95;
+  --bg: #0f001a; /* violet-noir très sombre */
+  --surface: #1a0033; /* fond carte prune sombre */
+  --text: #e9d5ff; /* texte violet clair / lavande */
+  --text-sec: #c084fc;
+  --accent: #a855f7; /* violet vif menaçant (Garmadon) */
+  --accent-soft: #6b21a8; /* violet plus sombre pour contrastes */
+  --border: #4c1d95;
 }
 
 * {
@@ -369,5 +369,151 @@ main {
 
   .timer-display {
     font-size: 3.8rem;
+  }
+}
+/* ------------------------------------------------------------------ */
+/* Téléphones ~6.4–6.5 pouces (1080×2400 px, ~400 ppi)               */
+/* Ex: certains Redmi Note 12 Pro, Poco X5, Samsung A34/A35, etc.    */
+/* ------------------------------------------------------------------ */
+@media screen and (max-width: 428px) and (max-height: 926px),
+       screen and (max-width: 414px) and (max-height: 896px) {
+  body {
+    padding: 16px 12px;
+  }
+
+  header.header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .mood {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .mood-btn {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 0.92rem;
+  }
+
+  main {
+    gap: 20px;
+  }
+
+  .panel {
+    padding: 20px 16px;
+  }
+
+  .logo {
+    font-size: 2.1rem;
+  }
+
+  .timer-display {
+    font-size: 3.6rem;
+    margin: 16px 0 24px;
+  }
+
+  .timer-actions button,
+  #addTaskBtn,
+  #saveNotesBtn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  #taskInput,
+  .notes textarea {
+    font-size: 0.96rem;
+    padding: 12px 14px;
+  }
+
+  #quoteText {
+    font-size: 1.12rem;
+  }
+
+  #disconnectBtn {
+    padding: 16px;
+    font-size: 1.05rem;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Redmi Note 12 (6.67") – 1080×2400 px (~395 ppi)                   */
+/* ------------------------------------------------------------------ */
+@media screen and (max-width: 430px) and (min-resolution: 380dpi) and (max-height: 950px) {
+  /* Ajustements spécifiques si besoin (souvent proche du précédent) */
+  .timer-display {
+    font-size: 3.4rem;
+  }
+
+  .panel h2 {
+    font-size: 1.28rem;
+  }
+
+  .task-input {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #addTaskBtn {
+    width: 100%;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* ZTE Blade A35 (6.75") – 720×1600 px (~260 ppi) – entrée de gamme  */
+/* ------------------------------------------------------------------ */
+@media screen and (max-width: 400px) and (max-height: 850px),
+       screen and (max-width: 380px) {
+  body {
+    padding: 14px 10px;
+  }
+
+  .logo {
+    font-size: 1.95rem;
+  }
+
+  .mood-btn {
+    font-size: 0.88rem;
+    padding: 8px 10px;
+  }
+
+  .panel {
+    padding: 18px 14px;
+  }
+
+  h2 {
+    font-size: 1.22rem;
+    margin-bottom: 16px;
+  }
+
+  .timer-display {
+    font-size: 3.1rem;
+    margin: 14px 0 20px;
+  }
+
+  .timer-controls,
+  .timer-actions {
+    gap: 8px;
+  }
+
+  .time-btn,
+  .timer-actions button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  #taskInput,
+  .notes textarea {
+    font-size: 0.92rem;
+    padding: 10px 12px;
+  }
+
+  #taskList li {
+    padding: 12px 14px;
+    font-size: 0.95rem;
   }
 }
