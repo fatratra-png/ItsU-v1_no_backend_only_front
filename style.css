@@ -1,8 +1,8 @@
 :root {
-  --font-base: "Inter", system-ui, -apple-system, sans-serif;
+  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
   --radius: 16px;
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.07);
-  --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 2px 10px rgba(0,0,0,0.07);
+  --shadow-md: 0 8px 28px rgba(0,0,0,0.12);
   --transition: all 0.24s ease;
 
   /* Thème par défaut (calm) – maintenant avec rouge anime */
@@ -10,8 +10,8 @@
   --surface: #ffffff;
   --text: #111827;
   --text-sec: #6b7280;
-  --accent: #e63946; /* Rouge vif anime principal */
-  --accent-soft: #ffcdd2; /* Rouge très doux pour fonds légers */
+  --accent: #e63946;       /* Rouge vif anime principal */
+  --accent-soft: #ffcdd2;  /* Rouge très doux pour fonds légers */
   --border: #e5e7eb;
 }
 
@@ -23,9 +23,9 @@
 }
 
 [data-theme="energy"] {
-  --bg: #fff5f5; /* Très léger rouge-orangé en fond */
+  --bg: #fff5f5;           /* Très léger rouge-orangé en fond */
   --surface: #ffffff;
-  --accent: #d32f2f; /* Rouge plus profond et puissant */
+  --accent: #d32f2f;       /* Rouge plus profond et puissant */
   --accent-soft: #ef9a9a;
 }
 
@@ -34,7 +34,7 @@
   --surface: #1e293b;
   --text: #f1f5f9;
   --text-sec: #94a3b8;
-  --accent: #f44336; /* Rouge bright en dark mode */
+  --accent: #f44336;       /* Rouge bright en dark mode */
   --accent-soft: #ef5350;
   --border: #334155;
 }
@@ -193,7 +193,7 @@ main {
   margin-left: auto;
   background: none;
   border: none;
-  color: #ef4444; /* Rouge suppression reste rouge classique */
+  color: #ef4444;          /* Rouge suppression reste rouge classique */
   font-size: 1.2rem;
   cursor: pointer;
   opacity: 0.6;
@@ -360,7 +360,7 @@ main {
   main {
     grid-template-columns: 1fr;
   }
-
+  
   .timer-display {
     font-size: 3.8rem;
   }
