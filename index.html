@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Icônes simples (optionnel mais joli) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <link rel="stylesheet" href="style.css" />
@@ -31,7 +30,7 @@
     </header>
 
     <main>
-      <section class="panel todo-panel">
+      <section class="panel">
         <div class="panel-header">
           <h2><i class="fa-solid fa-list-check"></i> Tâches & Notes</h2>
           <div class="task-stats" id="taskStats">0 / 0 terminées</div>
@@ -39,7 +38,7 @@
         
         <div class="todo">
           <div class="todo-input-group">
-            <input id="taskInput" type="text" placeholder="Nouvelle tâche..." />
+            <input id="taskInput" type="text" placeholder="Nouvelle tâche…" autocomplete="off" />
             <button id="addTaskBtn"><i class="fa-solid fa-plus"></i> Ajouter</button>
           </div>
           <ul id="taskList"></ul>
@@ -47,7 +46,7 @@
         </div>
 
         <div class="notes">
-          <textarea id="notesInput" placeholder="Notes, idées, cours, pensées..."></textarea>
+          <textarea id="notesInput" placeholder="Notes, idées, cours…"></textarea>
           <div class="notes-footer">
             <button id="saveNotesBtn"><i class="fa-solid fa-floppy-disk"></i> Sauvegarder</button>
             <div id="wordCount">0 mots</div>
@@ -55,7 +54,7 @@
         </div>
       </section>
 
-      <section class="panel timer-panel">
+      <section class="panel">
         <h2><i class="fa-solid fa-hourglass-half"></i> Pause & Timer</h2>
         <div class="timer">
           <div class="timer-controls">
@@ -75,20 +74,20 @@
         </div>
       </section>
 
-      <section class="panel quote-panel">
+      <section class="panel">
         <h2><i class="fa-solid fa-lightbulb"></i> Inspiration</h2>
         <div class="quote-box">
-          <p id="quoteText">Clique sur « Nouvelle » ou attends...</p>
+          <p id="quoteText">Clique sur « Nouvelle » ou attends…</p>
           <div class="quote-actions">
             <button id="newQuoteBtn">Nouvelle citation</button>
             <label class="auto-quote-toggle">
-              <input type="checkbox" id="autoQuote" checked> Auto (45s)
+              <input type="checkbox" id="autoQuote" checked> Auto (45 s)
             </label>
           </div>
         </div>
       </section>
 
-      <section class="panel disconnect-panel">
+      <section class="panel">
         <button id="disconnectBtn"><i class="fa-solid fa-power-off"></i> Mode déconnexion</button>
       </section>
     </main>

@@ -1,155 +1,117 @@
-// Thèmes + détection dark mode système
-const moodButtons = document.querySelectorAll('.mood-btn');
+// ── Thèmes ───────────────────────────────────────────────
+const moodButtons = document.querySelectorAll(".mood-btn");
 
-moodButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    moodButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.documentElement.setAttribute('data-theme', btn.dataset.theme);
+moodButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    moodButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    document.documentElement.setAttribute("data-theme", btn.dataset.theme);
   });
 });
 
-// To-Do amélioré
-let tasks = JSON.parse(localStorage.getItem('itsyou-tasks')) || [];
+// ── To-Do ─────────────────────────────────────────────────
+let tasks = JSON.parse(localStorage.getItem("itsyou-tasks")) || [];
 
-const taskInput = document.getElementById('taskInput');
-const addTaskBtn = document.getElementById('addTaskBtn');
-const taskList = document.getElementById('taskList');
-const taskStats = document.getElementById('taskStats');
-const clearAllTasks = document.getElementById('clearAllTasks');
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
 
 function renderTasks() {
-  taskList.innerHTML = '';
-  const total = tasks.length;
-  const done = tasks.filter(t => t.done).length;
-  taskStats.textContent = `${done} / ${total} terminées`;
-
+  taskList.innerHTML = "";
   tasks.forEach((task, index) => {
-    const li = document.createElement('li');
+    const li = document.createElement("li");
+    const isDone = task.done ? "completed" : "";
+
     li.innerHTML = `
-      <input type="checkbox" ${task.done ? 'checked' : ''}>
+      <input type="checkbox" ${task.done ? "checked" : ""}>
       <span>${task.text}</span>
       <button class="delete-btn" data-index="${index}">×</button>
     `;
 
-    li.querySelector('input').addEventListener('change', e => {
+    li.querySelector("input").addEventListener("change", (e) => {
       tasks[index].done = e.target.checked;
       saveTasks();
       renderTasks();
     });
 
-    li.querySelector('.delete-btn').addEventListener('click', () => {
+    li.querySelector(".delete-btn").addEventListener("click", () => {
       tasks.splice(index, 1);
       saveTasks();
       renderTasks();
     });
 
-    if (task.done) li.classList.add('completed');
-
+    if (task.done) li.classList.add("completed");
     taskList.appendChild(li);
-    setTimeout(() => li.classList.add('appear'), 50 + index * 60);
   });
 }
 
 function saveTasks() {
-  localStorage.setItem('itsyou-tasks', JSON.stringify(tasks));
+  localStorage.setItem("itsyou-tasks", JSON.stringify(tasks));
 }
 
-addTaskBtn.addEventListener('click', addNewTask);
-taskInput.addEventListener('keypress', e => { if (e.key === 'Enter') addNewTask(); });
-
-function addNewTask() {
+addTaskBtn.addEventListener("click", () => {
   const text = taskInput.value.trim();
   if (!text) return;
+
   tasks.push({ text, done: false });
-  taskInput.value = '';
+  taskInput.value = "";
   saveTasks();
   renderTasks();
-}
+});
 
-clearAllTasks.addEventListener('click', () => {
-  if (!tasks.length) return;
-  if (confirm("Vraiment tout supprimer ? Cette action est irréversible.")) {
-    tasks = [];
-    saveTasks();
-    renderTasks();
-  }
+taskInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") addTaskBtn.click();
 });
 
 renderTasks();
 
-// Notes + auto-save + compteur
-const notesInput = document.getElementById('notesInput');
-const saveNotesBtn = document.getElementById('saveNotesBtn');
-const wordCount = document.getElementById('wordCount');
+// ── Notes ─────────────────────────────────────────────────
+const notesInput = document.getElementById("notesInput");
+const saveNotesBtn = document.getElementById("saveNotesBtn");
 
-notesInput.value = localStorage.getItem('itsyou-notes') || '';
+notesInput.value = localStorage.getItem("itsyou-notes") || "";
 
-function updateWordCount() {
-  const words = notesInput.value.trim().split(/\s+/).filter(w => w).length;
-  wordCount.textContent = words + (words === 1 ? ' mot' : ' mots');
-}
-
-notesInput.addEventListener('input', updateWordCount);
-
-saveNotesBtn.addEventListener('click', () => {
-  localStorage.setItem('itsyou-notes', notesInput.value);
-  saveNotesBtn.innerHTML = '<i class="fa-solid fa-check"></i> Sauvegardé';
-  setTimeout(() => saveNotesBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Sauvegarder', 2000);
+saveNotesBtn.addEventListener("click", () => {
+  localStorage.setItem("itsyou-notes", notesInput.value);
+  saveNotesBtn.textContent = "Sauvegardé ✓";
+  setTimeout(() => (saveNotesBtn.textContent = "Sauvegarder"), 1800);
 });
 
-setInterval(() => {
-  localStorage.setItem('itsyou-notes', notesInput.value);
-}, 8000);
+// ── Citations ─────────────────────────────────────────────
+const quotes = [
+  "Chaque pas compte, même les plus petits.",
+  "Tu es plus fort que tes excuses d’hier.",
+  "La constance bat le talent quand le talent ne travaille pas.",
+  "Respire. Tu es exactement là où tu dois être.",
+  "Le progrès silencieux est le plus puissant.",
+  "Commence avant d’être prêt. C’est comme ça qu’on grandit.",
+  "Un jour difficile ≠ un mauvais parcours.",
+  "Ton futur toi te remercie déjà.",
+];
 
-updateWordCount();
-
-// Citations + auto-change
-const quotes = [ /* même liste que précédemment */ ];
-let autoQuoteInterval;
-
-const quoteText = document.getElementById('quoteText');
-const newQuoteBtn = document.getElementById('newQuoteBtn');
-const autoQuoteToggle = document.getElementById('autoQuote');
-
-function showRandomQuote() {
-  quoteText.style.opacity = '0';
+document.getElementById("newQuoteBtn").addEventListener("click", () => {
+  const quoteEl = document.getElementById("quoteText");
+  quoteEl.style.opacity = "0";
   setTimeout(() => {
-    quoteText.textContent = quotes[Math.floor(Math.random() * quotes.length)];
-    quoteText.style.opacity = '1';
-  }, 400);
-}
-
-newQuoteBtn.addEventListener('click', showRandomQuote);
-
-autoQuoteToggle.addEventListener('change', () => {
-  if (autoQuoteToggle.checked) {
-    autoQuoteInterval = setInterval(showRandomQuote, 45000);
-  } else {
-    clearInterval(autoQuoteInterval);
-  }
+    quoteEl.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+    quoteEl.style.opacity = "1";
+  }, 300);
 });
 
-// Lancer auto au démarrage si coché
-if (autoQuoteToggle.checked) {
-  autoQuoteInterval = setInterval(showRandomQuote, 45000);
-  showRandomQuote(); // première citation immédiate
-}
-
-// Timer avec pulse low-time
+// ── Timer ─────────────────────────────────────────────────
 let timerTime = 0;
 let timerRunning = false;
 let timerInterval = null;
 
-const display = document.getElementById('timerDisplay');
-const startBtn = document.getElementById('startTimerBtn');
-const pauseBtn = document.getElementById('pauseTimerBtn');
-const resetBtn = document.getElementById('resetTimerBtn');
+const display = document.getElementById("timerDisplay");
+const startBtn = document.getElementById("startTimerBtn");
+const pauseBtn = document.getElementById("pauseTimerBtn");
+const resetBtn = document.getElementById("resetTimerBtn");
 
-function formatTime(s) {
-  const m = String(Math.floor(s / 60)).padStart(2, '0');
-  const sec = String(s % 60).padStart(2, '0');
-  return `${m}:${sec}`;
+function formatTime(seconds) {
+  const min = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const sec = String(seconds % 60).padStart(2, "0");
+  return `${min}:${sec}`;
 }
 
 function updateButtons() {
@@ -158,13 +120,14 @@ function updateButtons() {
   resetBtn.disabled = timerTime === 0 && !timerRunning;
 }
 
-document.querySelectorAll('.time-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+document.querySelectorAll(".time-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document
+      .querySelectorAll(".time-btn")
+      .forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
     timerTime = parseInt(btn.dataset.time);
     display.textContent = formatTime(timerTime);
-    display.classList.remove('low-time');
     if (timerRunning) {
       clearInterval(timerInterval);
       timerRunning = false;
@@ -173,7 +136,7 @@ document.querySelectorAll('.time-btn').forEach(btn => {
   });
 });
 
-startBtn.addEventListener('click', () => {
+startBtn.addEventListener("click", () => {
   if (timerTime <= 0) return;
   timerRunning = true;
   updateButtons();
@@ -182,69 +145,45 @@ startBtn.addEventListener('click', () => {
     timerTime--;
     display.textContent = formatTime(timerTime);
 
-    if (timerTime <= 60) {
-      display.classList.add('low-time');
-    } else {
-      display.classList.remove('low-time');
-    }
-
     if (timerTime <= 0) {
       clearInterval(timerInterval);
       timerRunning = false;
-      display.classList.remove('low-time');
-      alert("Temps écoulé. Prends une vraie pause.");
+      alert("Temps écoulé ! Prends une vraie pause.");
       updateButtons();
     }
   }, 1000);
 });
 
-pauseBtn.addEventListener('click', () => {
+pauseBtn.addEventListener("click", () => {
   clearInterval(timerInterval);
   timerRunning = false;
-  display.classList.remove('low-time');
   updateButtons();
 });
 
-resetBtn.addEventListener('click', () => {
+resetBtn.addEventListener("click", () => {
   clearInterval(timerInterval);
   timerTime = 0;
   timerRunning = false;
-  display.textContent = '00:00';
-  display.classList.remove('low-time');
-  document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+  display.textContent = "00:00";
+  document
+    .querySelectorAll(".time-btn")
+    .forEach((b) => b.classList.remove("active"));
   updateButtons();
 });
 
-// Déconnexion – son très calme (vagues + vent léger)
-document.getElementById('disconnectBtn').addEventListener('click', () => {
-  const calmSound = new Audio('https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3'); // vagues calmes + vent très doux
-  calmSound.loop = true;
-  calmSound.volume = 0.18;
-
+// ── Déconnexion ───────────────────────────────────────────
+document.getElementById("disconnectBtn").addEventListener("click", () => {
   document.body.innerHTML = `
-    <div class="disconnect-screen">
-      <div class="content">
-        <h1>Respire</h1>
-        <p>Le temps s’arrête ici.<br>Laisse ton esprit flotter.</p>
-        
-        <div class="ambient-player">
-          <button id="playAmbient" class="play-btn">Jouer le calme ♪</button>
-        </div>
-
-        <button onclick="location.reload()" class="return-btn">
-          Revenir quand je suis prêt
+    <div style="height:100dvh;display:flex;justify-content:center;align-items:center;background:#000;color:#fff;text-align:center;padding:20px;">
+      <div>
+        <h1 style="font-size:3.5rem;margin-bottom:1.5rem;">À tout à l’heure</h1>
+        <p style="font-size:1.4rem;margin-bottom:2.5rem;opacity:0.9;">
+          Respire profondément.<br>Reviens quand tu te sens prêt.
+        </p>
+        <button onclick="location.reload()" style="padding:16px 40px;background:var(--accent);color:white;border:none;border-radius:999px;font-size:1.2rem;font-weight:600;cursor:pointer;">
+          Revenir à ItsU
         </button>
       </div>
     </div>
   `;
-
-  document.getElementById('playAmbient')?.addEventListener('click', () => {
-    if (calmSound.paused) {
-      calmSound.play().catch(e => console.log("Lecture bloquée:", e));
-      document.querySelector('.play-btn').textContent = "Pause le calme ♪";
-    } else {
-      calmSound.pause();
-      document.querySelector('.play-btn').textContent = "Jouer le calme ♪";
-    }
-  });
 });
