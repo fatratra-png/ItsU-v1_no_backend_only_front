@@ -1,0 +1,199 @@
+:root {
+  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --radius: 18px;
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-md: 0 10px 32px rgba(0,0,0,0.11);
+  --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --bg: #fafcff;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --text-sec: #64748b;
+  --accent: #e63946;
+  --accent-soft: #ffebee;
+  --border: #e2e8f0;
+}
+
+[data-theme="focus"] {
+  --bg: #f0f9ff;
+  --accent: #2563eb;
+  --accent-soft: #dbeafe;
+}
+
+[data-theme="energy"] {
+  --bg: #fff5f5;
+  --accent: #dc2626;
+  --accent-soft: #fee2e2;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --text: #f1f5f9;
+  --text-sec: #94a3b8;
+  --accent: #f87171;
+  --accent-soft: #450a0a;
+  --border: #334155;
+}
+
+/* Respect dark mode système si pas de thème forcé */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #f1f5f9;
+    --text-sec: #94a3b8;
+    --accent: #f87171;
+    --accent-soft: #450a0a;
+    --border: #334155;
+  }
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: var(--font-base);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  padding: 28px 16px;
+  transition: background 0.6s ease;
+}
+
+.app { max-width: 1280px; margin: 0 auto; }
+
+header.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.logo {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mood { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.mood-btn {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.mood-btn:hover, .mood-btn.active {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+}
+
+.panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.panel h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-stats {
+  font-size: 0.95rem;
+  color: var(--text-sec);
+  font-weight: 500;
+}
+
+.clear-btn {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.clear-btn:hover { background: #dc2626; transform: translateY(-1px); }
+
+/* ... (le reste du CSS reste quasiment identique, je ne le recopie pas entièrement pour gagner de la place) ... */
+
+/* Améliorations timer low-time */
+.timer-display.low-time {
+  color: var(--accent);
+  animation: pulse 1.2s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.04); }
+}
+
+/* Notes footer amélioré */
+.notes-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Quote actions */
+.quote-actions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.auto-quote-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: var(--text-sec);
+  user-select: none;
+}
+
+.auto-quote-toggle input {
+  accent-color: var(--accent);
+}

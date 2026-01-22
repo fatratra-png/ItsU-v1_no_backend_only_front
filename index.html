@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ItsU – Ton espace calme & focus</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icônes simples (optionnel mais joli) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+    <header class="header">
+      <div class="logo">
+        <i class="fa-solid fa-feather-pointed"></i> ItsU
+      </div>
+      
+      <div class="mood">
+        <button class="mood-btn active" data-theme="calm">Calm</button>
+        <button class="mood-btn" data-theme="focus">Focus</button>
+        <button class="mood-btn" data-theme="energy">Energy</button>
+        <button class="mood-btn" data-theme="dark">Dark</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel todo-panel">
+        <div class="panel-header">
+          <h2><i class="fa-solid fa-list-check"></i> Tâches & Notes</h2>
+          <div class="task-stats" id="taskStats">0 / 0 terminées</div>
+        </div>
+        
+        <div class="todo">
+          <div class="todo-input-group">
+            <input id="taskInput" type="text" placeholder="Nouvelle tâche..." />
+            <button id="addTaskBtn"><i class="fa-solid fa-plus"></i> Ajouter</button>
+          </div>
+          <ul id="taskList"></ul>
+          <button id="clearAllTasks" class="clear-btn"><i class="fa-solid fa-trash-can"></i> Tout effacer</button>
+        </div>
+
+        <div class="notes">
+          <textarea id="notesInput" placeholder="Notes, idées, cours, pensées..."></textarea>
+          <div class="notes-footer">
+            <button id="saveNotesBtn"><i class="fa-solid fa-floppy-disk"></i> Sauvegarder</button>
+            <div id="wordCount">0 mots</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel timer-panel">
+        <h2><i class="fa-solid fa-hourglass-half"></i> Pause & Timer</h2>
+        <div class="timer">
+          <div class="timer-controls">
+            <button class="time-btn" data-time="300">5 min</button>
+            <button class="time-btn" data-time="600">10 min</button>
+            <button class="time-btn" data-time="900">15 min</button>
+            <button class="time-btn" data-time="1200">20 min</button>
+          </div>
+          
+          <div class="timer-display" id="timerDisplay">00:00</div>
+          
+          <div class="timer-actions">
+            <button id="startTimerBtn"><i class="fa-solid fa-play"></i> Démarrer</button>
+            <button id="pauseTimerBtn" disabled><i class="fa-solid fa-pause"></i> Pause</button>
+            <button id="resetTimerBtn" disabled><i class="fa-solid fa-rotate-left"></i> Reset</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel quote-panel">
+        <h2><i class="fa-solid fa-lightbulb"></i> Inspiration</h2>
+        <div class="quote-box">
+          <p id="quoteText">Clique sur « Nouvelle » ou attends...</p>
+          <div class="quote-actions">
+            <button id="newQuoteBtn">Nouvelle citation</button>
+            <label class="auto-quote-toggle">
+              <input type="checkbox" id="autoQuote" checked> Auto (45s)
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel disconnect-panel">
+        <button id="disconnectBtn"><i class="fa-solid fa-power-off"></i> Mode déconnexion</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
