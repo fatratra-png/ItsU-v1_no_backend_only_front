@@ -1,17 +1,17 @@
 :root {
-  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-base: "Inter", system-ui, -apple-system, sans-serif;
   --radius: 16px;
-  --shadow-sm: 0 2px 10px rgba(0,0,0,0.07);
-  --shadow-md: 0 8px 28px rgba(0,0,0,0.12);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.07);
+  --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.12);
   --transition: all 0.24s ease;
 
-  /* Thème par défaut (calm) – maintenant avec rouge anime */
+  /* Thème par défaut (calm) – garde ton rouge anime */
   --bg: #f9fafb;
   --surface: #ffffff;
   --text: #111827;
   --text-sec: #6b7280;
-  --accent: #e63946;       /* Rouge vif anime principal */
-  --accent-soft: #ffcdd2;  /* Rouge très doux pour fonds légers */
+  --accent: #e63946;
+  --accent-soft: #ffcdd2;
   --border: #e5e7eb;
 }
 
@@ -20,23 +20,29 @@
   --surface: #ffffff;
   --accent: #3b82f6;
   --accent-soft: #93c5fd;
+  --border: #bfdbfe;
 }
 
+/* ── Energy = Lloyd Garmadon ──────────────────────────────────────── */
 [data-theme="energy"] {
-  --bg: #fff5f5;           /* Très léger rouge-orangé en fond */
-  --surface: #ffffff;
-  --accent: #d32f2f;       /* Rouge plus profond et puissant */
-  --accent-soft: #ef9a9a;
+  --bg:        #f0fdf4;           /* fond vert très clair / émeraude pâle */
+  --surface:   #ffffff;
+  --text:      #065f46;           /* texte vert foncé ninja */
+  --text-sec:  #047857;
+  --accent:    #10b981;           /* vert émeraude vif (Lloyd energy) */
+  --accent-soft: #d1fae5;         /* vert très doux pour les fonds */
+  --border:    #a7f3d0;
 }
 
+/* ── Dark = Garmadon (père) ───────────────────────────────────────── */
 [data-theme="dark"] {
-  --bg: #0f172a;
-  --surface: #1e293b;
-  --text: #f1f5f9;
-  --text-sec: #94a3b8;
-  --accent: #f44336;       /* Rouge bright en dark mode */
-  --accent-soft: #ef5350;
-  --border: #334155;
+  --bg:        #0f001a;           /* violet-noir très sombre */
+  --surface:   #1a0033;           /* fond carte prune sombre */
+  --text:      #e9d5ff;           /* texte violet clair / lavande */
+  --text-sec:  #c084fc;
+  --accent:    #a855f7;           /* violet vif menaçant (Garmadon) */
+  --accent-soft: #6b21a8;         /* violet plus sombre pour contrastes */
+  --border:    #4c1d95;
 }
 
 * {
@@ -193,7 +199,7 @@ main {
   margin-left: auto;
   background: none;
   border: none;
-  color: #ef4444;          /* Rouge suppression reste rouge classique */
+  color: #ef4444; /* Rouge suppression reste rouge classique */
   font-size: 1.2rem;
   cursor: pointer;
   opacity: 0.6;
@@ -360,7 +366,7 @@ main {
   main {
     grid-template-columns: 1fr;
   }
-  
+
   .timer-display {
     font-size: 3.8rem;
   }
