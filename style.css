@@ -376,7 +376,7 @@ main {
 /* Ex: certains Redmi Note 12 Pro, Poco X5, Samsung A34/A35, etc.    */
 /* ------------------------------------------------------------------ */
 @media screen and (max-width: 428px) and (max-height: 926px),
-       screen and (max-width: 414px) and (max-height: 896px) {
+  screen and (max-width: 414px) and (max-height: 896px) {
   body {
     padding: 16px 12px;
   }
@@ -467,7 +467,7 @@ main {
 /* ZTE Blade A35 (6.75") – 720×1600 px (~260 ppi) – entrée de gamme  */
 /* ------------------------------------------------------------------ */
 @media screen and (max-width: 400px) and (max-height: 850px),
-       screen and (max-width: 380px) {
+  screen and (max-width: 380px) {
   body {
     padding: 14px 10px;
   }

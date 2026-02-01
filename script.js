@@ -1,80 +1,80 @@
 // ── Thèmes ───────────────────────────────────────────────
-const moodButtons = document.querySelectorAll('.mood-btn');
+const moodButtons = document.querySelectorAll(".mood-btn");
 
-moodButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    moodButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.documentElement.setAttribute('data-theme', btn.dataset.theme);
+moodButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    moodButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    document.documentElement.setAttribute("data-theme", btn.dataset.theme);
   });
 });
 
 // ── To-Do ─────────────────────────────────────────────────
-let tasks = JSON.parse(localStorage.getItem('itsyou-tasks')) || [];
+let tasks = JSON.parse(localStorage.getItem("itsyou-tasks")) || [];
 
-const taskInput = document.getElementById('taskInput');
-const addTaskBtn = document.getElementById('addTaskBtn');
-const taskList = document.getElementById('taskList');
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
 
 function renderTasks() {
-  taskList.innerHTML = '';
+  taskList.innerHTML = "";
   tasks.forEach((task, index) => {
-    const li = document.createElement('li');
-    const isDone = task.done ? 'completed' : '';
+    const li = document.createElement("li");
+    const isDone = task.done ? "completed" : "";
 
     li.innerHTML = `
-      <input type="checkbox" ${task.done ? 'checked' : ''}>
+      <input type="checkbox" ${task.done ? "checked" : ""}>
       <span>${task.text}</span>
       <button class="delete-btn" data-index="${index}">×</button>
     `;
 
-    li.querySelector('input').addEventListener('change', (e) => {
+    li.querySelector("input").addEventListener("change", (e) => {
       tasks[index].done = e.target.checked;
       saveTasks();
       renderTasks();
     });
 
-    li.querySelector('.delete-btn').addEventListener('click', () => {
+    li.querySelector(".delete-btn").addEventListener("click", () => {
       tasks.splice(index, 1);
       saveTasks();
       renderTasks();
     });
 
-    if (task.done) li.classList.add('completed');
+    if (task.done) li.classList.add("completed");
     taskList.appendChild(li);
   });
 }
 
 function saveTasks() {
-  localStorage.setItem('itsyou-tasks', JSON.stringify(tasks));
+  localStorage.setItem("itsyou-tasks", JSON.stringify(tasks));
 }
 
-addTaskBtn.addEventListener('click', () => {
+addTaskBtn.addEventListener("click", () => {
   const text = taskInput.value.trim();
   if (!text) return;
-  
+
   tasks.push({ text, done: false });
-  taskInput.value = '';
+  taskInput.value = "";
   saveTasks();
   renderTasks();
 });
 
-taskInput.addEventListener('keypress', e => {
-  if (e.key === 'Enter') addTaskBtn.click();
+taskInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") addTaskBtn.click();
 });
 
 renderTasks();
 
 // ── Notes ─────────────────────────────────────────────────
-const notesInput = document.getElementById('notesInput');
-const saveNotesBtn = document.getElementById('saveNotesBtn');
+const notesInput = document.getElementById("notesInput");
+const saveNotesBtn = document.getElementById("saveNotesBtn");
 
-notesInput.value = localStorage.getItem('itsyou-notes') || '';
+notesInput.value = localStorage.getItem("itsyou-notes") || "";
 
-saveNotesBtn.addEventListener('click', () => {
-  localStorage.setItem('itsyou-notes', notesInput.value);
-  saveNotesBtn.textContent = 'Sauvegardé ✓';
-  setTimeout(() => saveNotesBtn.textContent = 'Sauvegarder', 1800);
+saveNotesBtn.addEventListener("click", () => {
+  localStorage.setItem("itsyou-notes", notesInput.value);
+  saveNotesBtn.textContent = "Sauvegardé ✓";
+  setTimeout(() => (saveNotesBtn.textContent = "Sauvegarder"), 1800);
 });
 
 // ── Citations ─────────────────────────────────────────────
@@ -89,12 +89,12 @@ const quotes = [
   "Ton futur toi te remercie déjà.",
 ];
 
-document.getElementById('newQuoteBtn').addEventListener('click', () => {
-  const quoteEl = document.getElementById('quoteText');
-  quoteEl.style.opacity = '0';
+document.getElementById("newQuoteBtn").addEventListener("click", () => {
+  const quoteEl = document.getElementById("quoteText");
+  quoteEl.style.opacity = "0";
   setTimeout(() => {
     quoteEl.textContent = quotes[Math.floor(Math.random() * quotes.length)];
-    quoteEl.style.opacity = '1';
+    quoteEl.style.opacity = "1";
   }, 300);
 });
 
@@ -103,14 +103,14 @@ let timerTime = 0;
 let timerRunning = false;
 let timerInterval = null;
 
-const display = document.getElementById('timerDisplay');
-const startBtn = document.getElementById('startTimerBtn');
-const pauseBtn = document.getElementById('pauseTimerBtn');
-const resetBtn = document.getElementById('resetTimerBtn');
+const display = document.getElementById("timerDisplay");
+const startBtn = document.getElementById("startTimerBtn");
+const pauseBtn = document.getElementById("pauseTimerBtn");
+const resetBtn = document.getElementById("resetTimerBtn");
 
 function formatTime(seconds) {
-  const min = String(Math.floor(seconds / 60)).padStart(2, '0');
-  const sec = String(seconds % 60).padStart(2, '0');
+  const min = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const sec = String(seconds % 60).padStart(2, "0");
   return `${min}:${sec}`;
 }
 
@@ -120,10 +120,12 @@ function updateButtons() {
   resetBtn.disabled = timerTime === 0 && !timerRunning;
 }
 
-document.querySelectorAll('.time-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+document.querySelectorAll(".time-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document
+      .querySelectorAll(".time-btn")
+      .forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
     timerTime = parseInt(btn.dataset.time);
     display.textContent = formatTime(timerTime);
     if (timerRunning) {
@@ -134,7 +136,7 @@ document.querySelectorAll('.time-btn').forEach(btn => {
   });
 });
 
-startBtn.addEventListener('click', () => {
+startBtn.addEventListener("click", () => {
   if (timerTime <= 0) return;
   timerRunning = true;
   updateButtons();
@@ -152,23 +154,25 @@ startBtn.addEventListener('click', () => {
   }, 1000);
 });
 
-pauseBtn.addEventListener('click', () => {
+pauseBtn.addEventListener("click", () => {
   clearInterval(timerInterval);
   timerRunning = false;
   updateButtons();
 });
 
-resetBtn.addEventListener('click', () => {
+resetBtn.addEventListener("click", () => {
   clearInterval(timerInterval);
   timerTime = 0;
   timerRunning = false;
-  display.textContent = '00:00';
-  document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+  display.textContent = "00:00";
+  document
+    .querySelectorAll(".time-btn")
+    .forEach((b) => b.classList.remove("active"));
   updateButtons();
 });
 
 // ── Déconnexion ───────────────────────────────────────────
-document.getElementById('disconnectBtn').addEventListener('click', () => {
+document.getElementById("disconnectBtn").addEventListener("click", () => {
   document.body.innerHTML = `
     <div style="height:100dvh;display:flex;justify-content:center;align-items:center;background:#000;color:#fff;text-align:center;padding:20px;">
       <div>
